@@ -1,16 +1,11 @@
-# ワークフローをトリガーするGitHubイベントの名前
-on:
-# PR作成をトリガーする
-  pull_request:
-  # PR作成・プッシュ時に実行
-    types: [opened, synchronize]
+name: Build
+
+on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Git checkout current branch #作業ブランチにchekout
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.ref }}
-    - name: docker compose exec command sample
-      run:  docker-compose up -d
+      - uses: actions/checkout@v2
+
+      - run: docker compose up -d
