@@ -4,23 +4,13 @@ on:
   pull_request:
   # PR作成・プッシュ時に実行
     types: [opened, synchronize]
-# ジョブ定義
 jobs:
-  run-test:
-    name: Run Test
-    # ubuntu環境で動作
+  build:
     runs-on: ubuntu-latest
-    # アクションを定義
     steps:
-    - name: checkout pushed commit
-      # ソースコードのチェックアウト
+    - name: Git checkout current branch #作業ブランチにchekout
       uses: actions/checkout@v2
       with:
-      # PRのHEADブランチを使う
-        ref: ${{ github.event.pull_request.head.sha }}
-    # E2E テストを Docker Compose で実行する
-    - name: run test on docker-compose
-      run: |
-        docker-compose -f ./emergency/docker-compose.yml build
-        docker-compose -f ./emergebcy/docker-compose.yml up --abort-on-container-exit
-      working-directory: ./emergency/
+        ref: ${{ github.ref }}
+    - name: docker compose exec command sample
+      run:  docker-compose up -d
