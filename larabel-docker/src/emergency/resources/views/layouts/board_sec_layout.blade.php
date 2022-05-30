@@ -1,1 +1,0 @@
-@yield('emergency_board_index')

@@ -1,1 +1,0 @@
-@yield('emergency_login_index')
