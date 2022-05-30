@@ -1,0 +1,1 @@
+@yield('emergency_board_add')
